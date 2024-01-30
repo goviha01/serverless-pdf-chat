@@ -24,9 +24,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
 }) => {
   return (
     <div className="col-span-4 h-full">
-      <div className="bg-gray-100 p-5">
-        <DocumentDetail {...conversation.document} />
-      </div>
+      
       <div className="px-3 pt-3 pb-5">
         {conversationListStatus === "idle" && (
           <button
@@ -74,7 +72,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
                   className="bg-gray-500 text-white w-full inline-flex items-center mt-2 px-4 py-2.5 border border-gray-100 rounded"
                 >
                   <ChatBubbleLeftRightIcon className="w-4 h-4 mr-2" />
-                  {getDateTime(conversation.created)}
+                 
                 </button>
               )}
               {params.conversationid !== conversation.conversationid && (
