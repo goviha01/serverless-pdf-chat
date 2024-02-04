@@ -5,11 +5,13 @@ import DocumentDetail from "./DocumentDetail";
 import { ArrowPathRoundedSquareIcon } from "@heroicons/react/24/outline";
 import { Document } from "../common/types";
 import Loading from "../../public/loading-grid.svg";
+import '@aws-amplify/ui-react/styles.css';
+import { Text, useTheme } from '@aws-amplify/ui-react';
 
 const DocumentList: React.FC = () => {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [listStatus, setListStatus] = useState<string>("idle");
-
+  const theme = useTheme();
   const fetchData = async () => {
     setListStatus("loading");
     const documents = await API.get("serverless-pdf-chat", "/doc", {});
@@ -23,6 +25,14 @@ const DocumentList: React.FC = () => {
 
   return (
     <div>
+      <div className="flex justify-between pt-6 pb-4">
+      <Link 
+              to={`/doc/koHEbwyFY6NHm8YPviAgQD/Sfo5pCwpztd7HN7WnVQJMx/`}
+              key='koHEbwyFY6NHm8YPviAgQD'
+              className="block p-6 bg-gray border border-gray-200 rounded hover:bg-gray-100"
+            ><Text fontWeight={theme.tokens.fontWeights.bold}
+            color={theme.tokens.colors.green[80]}>Start New conversation</Text></Link>
+      </div>
       <div className="flex justify-between pt-6 pb-4">
         <h2 className="text-2xl font-bold">Uploaded KB Docs</h2>
         <button
