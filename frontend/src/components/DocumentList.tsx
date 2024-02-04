@@ -27,7 +27,7 @@ const DocumentList: React.FC = () => {
     <div>
       <div className="flex justify-between pt-6 pb-4">
       <Link 
-              to={`/doc/koHEbwyFY6NHm8YPviAgQD/Sfo5pCwpztd7HN7WnVQJMx/`}
+              to={`/doc/XXX/YYY`}
               key='koHEbwyFY6NHm8YPviAgQD'
               className="block p-6 bg-gray border border-gray-200 rounded hover:bg-gray-100"
             ><Text fontWeight={theme.tokens.fontWeights.bold}
