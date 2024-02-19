@@ -17,7 +17,9 @@ const Document: React.FC = () => {
     "idle" | "loading"
   >("idle");
   const [prompt, setPrompt] = useState("");
-
+  const [modelId, setModelId] = useState("anthropic.claude-v2");
+  const [domainId, setDomainId] = useState("Home Energy Tax Credit");
+  
   const fetchData = async (conversationid = params.conversationid) => {
     setLoading("loading");
     const conversation = await API.get(
@@ -35,6 +37,13 @@ const Document: React.FC = () => {
 
   const handlePromptChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
+  };
+  const handleModelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setModelId(event.target.value);
+  };
+
+  const handleDomainChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setDomainId(event.target.value);
   };
 
   const addConversation = async () => {
@@ -89,10 +98,14 @@ const Document: React.FC = () => {
         body: {
           fileName: conversation?.document.filename,
           prompt: prompt,
+          modelId: modelId,
+          domainId: domainId,
         },
       }
     );
     setPrompt("");
+    setModelId(modelId);
+    setDomainId(domainId);
     fetchData(conversation?.conversationid);
     setMessageStatus("idle");
   };
@@ -115,11 +128,15 @@ const Document: React.FC = () => {
           />
           <ChatMessages
             prompt={prompt}
+            modelId={modelId}
+            domainId={domainId}
             conversation={conversation}
             messageStatus={messageStatus}
             submitMessage={submitMessage}
             handleKeyPress={handleKeyPress}
             handlePromptChange={handlePromptChange}
+            handleModelChange={handleModelChange}
+            handleDomainChange={handleDomainChange}
           />
         </div>
       )}

@@ -1,26 +1,48 @@
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import Loading from "../../public/loading-dots.svg";
 import { Conversation } from "../common/types";
+import { SelectField } from '@aws-amplify/ui-react';
+
 
 interface ChatMessagesProps {
   conversation: Conversation;
   messageStatus: string;
   handlePromptChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleModelChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleDomainChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   prompt: string;
+  modelId: string;
+  domainId: string;
   submitMessage: () => Promise<void>;
 }
 
 const ChatMessages: React.FC<ChatMessagesProps> = ({
   prompt,
+  modelId,
+  domainId,
   conversation,
   messageStatus,
   submitMessage,
   handlePromptChange,
+  handleModelChange,
+  handleDomainChange,
   handleKeyPress,
 }) => {
   return (
     <div className="flex flex-col justify-between h-full overflow-y-auto col-span-8 p-5 border-l border-gray-200">
+<div>
+  <SelectField label="Domain" id="domainId" value={domainId} onChange={handleDomainChange}>
+    <option value="Home Energy Tax Credit">Home Energy Tax Credit</option>
+    <option value="Electric Vehicle Tax Credit">Electric Vehicle Tax Credit</option>
+  </SelectField>
+     
+  <SelectField label="Model" id="modelId" value={modelId} onChange={handleModelChange} onLoad={handleModelChange}>
+    <option value="anthropic.claude-v2">Anthropic-Claude</option>
+    <option value="amazon.titan-text-express-v1">Titan-Text-Express</option>
+  </SelectField>
+  <br></br>
+  </div>
       <div className="pb-5">
         <div className="grid gap-5">
           {conversation.messages.map((message, i) => (
