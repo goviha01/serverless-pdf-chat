@@ -7,10 +7,9 @@ import {
   DocumentIcon,
   CheckCircleIcon,
   CloudArrowUpIcon,
-  XCircleIcon,
+  XCircleIcon, build
   ArrowLeftCircleIcon,
 } from "@heroicons/react/24/outline";
-import { set } from "date-fns";
 
 const DocumentUploader: React.FC = () => {
   const [inputStatus, setInputStatus] = useState<string>("idle");
