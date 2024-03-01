@@ -1,6 +1,8 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import { API } from "aws-amplify";
 import { filesize } from "filesize";
+import { SelectField } from '@aws-amplify/ui-react';
+
 import {
   DocumentIcon,
   CheckCircleIcon,
@@ -8,11 +10,13 @@ import {
   XCircleIcon,
   ArrowLeftCircleIcon,
 } from "@heroicons/react/24/outline";
+import { set } from "date-fns";
 
 const DocumentUploader: React.FC = () => {
   const [inputStatus, setInputStatus] = useState<string>("idle");
   const [buttonStatus, setButtonStatus] = useState<string>("ready");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [domainId, setDomainId] = useState<string>("Default");
 
   useEffect(() => {
     if (selectedFile) {
@@ -29,12 +33,17 @@ const DocumentUploader: React.FC = () => {
     setSelectedFile(file || null);
   };
 
+  const handleDomainChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setDomainId(event.target.value);
+  };
+
   const uploadFile = async () => {
     setButtonStatus("uploading");
     await API.get("serverless-pdf-chat", "/generate_presigned_url", {
       headers: { "Content-Type": "application/json" },
       queryStringParameters: {
         file_name: selectedFile?.name,
+        domain_id: domainId,
       },
     }).then((presigned_url) => {
       fetch(presigned_url.presignedurl, {
@@ -51,11 +60,21 @@ const DocumentUploader: React.FC = () => {
     setSelectedFile(null);
     setInputStatus("idle");
     setButtonStatus("ready");
+    setDomainId("Default");
   };
 
   return (
     <div>
-      <h2 className="text-2xl font-bold pb-4">Add Knowledge Base(KeyboardEvent)</h2>
+      <div>
+      <h2 className="text-2xl font-bold pb-4"> Domain</h2>
+  <SelectField label="" id="domainId" value={domainId} onChange={handleDomainChange}>
+    <option value="Default">General</option>
+    <option value="Home Energy Tax Credit">Home Energy Tax Credit</option>
+    <option value="Electric Vehicle Tax Credit">Electric Vehicle Tax Credit</option>
+  </SelectField>
+  <br></br>
+  </div>
+      <h2 className="text-2xl font-bold pb-4">Add Knowledge Base</h2>
       {inputStatus === "idle" && (
         <div className="flex items-center justify-center w-full">
           <label
