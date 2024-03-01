@@ -7,7 +7,7 @@ import {
   DocumentIcon,
   CheckCircleIcon,
   CloudArrowUpIcon,
-  XCircleIcon, build
+  XCircleIcon,
   ArrowLeftCircleIcon,
 } from "@heroicons/react/24/outline";
 
