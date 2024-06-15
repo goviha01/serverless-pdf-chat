@@ -39,6 +39,8 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
      
   <SelectField label="Model" id="modelId" value={modelId} onChange={handleModelChange} onLoad={handleModelChange}>
     <option value="anthropic.claude-v2">Anthropic Claude</option>
+    <option value="anthropic.claude-3-haiku-20240307-v1:0">Anthropic Claude 3 Haiku</option>
+    <option value="anthropic.claude-3-sonnet-20240229-v1:0">Anthropic Claude 3 Sonnet</option>
     <option value="amazon.titan-text-express-v1">Amazon Titan Text</option>
     <option value="cohere.command-text-v14">Cohere Command</option>
     <option value="ai21.j2-ultra-v1">AI21 Jurassic-2 Ultra</option>
