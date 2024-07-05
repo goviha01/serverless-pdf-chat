@@ -67,7 +67,6 @@ const DocumentUploader: React.FC = () => {
       <div>
       <h2 className="text-2xl font-bold pb-4"> Domain</h2>
   <SelectField label="" id="domainId" value={domainId} onChange={handleDomainChange}>
-    <option value="Default">General</option>
     <option value="Home Energy Tax Credit">Home Energy Tax Credit</option>
     <option value="Electric Vehicle Tax Credit">Electric Vehicle Tax Credit</option>
   </SelectField>

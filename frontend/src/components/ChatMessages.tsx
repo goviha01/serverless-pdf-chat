@@ -33,6 +33,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
     <div className="flex flex-col justify-between h-full overflow-y-auto col-span-8 p-5 border-l border-gray-200">
 <div>
   <SelectField label="Domain" id="domainId" value={domainId} onChange={handleDomainChange}>
+    <option value="Auto Detect">Auto Detect</option>
     <option value="Home Energy Tax Credit">Home Energy Tax Credit</option>
     <option value="Electric Vehicle Tax Credit">Electric Vehicle Tax Credit</option>
   </SelectField>
